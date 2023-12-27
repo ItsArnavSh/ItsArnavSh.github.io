@@ -4,7 +4,7 @@
 }   
 .sayMyName
 {
-    border-bottom: 5px solid rgb(0, 0, 0);
+    padding: 0px 35%;
 }
 .glitch
 {
@@ -14,10 +14,6 @@
     transition: background-color 0.3s;
     margin: auto;
     animation: glitchEffect 1s forwards alternate infinite;
-}
-.glitch :hover
-{
-    font-size: 400%;
 }
 @keyframes glitchEffect
 {
@@ -42,7 +38,8 @@
     background-color: white;
     text-decoration: none;
 }
-.logo:hover
+.logo:link
 {
-    animation: glitchEffect 1s forwards alternate infinite;
+    size:100px;
+    box-shadow: 20px;
 }
