@@ -4,19 +4,20 @@
 }   
 .sayMyName
 {
-    border-bottom: 2px solid white;
+    border-bottom: 5px solid rgb(0, 0, 0);
 }
 .glitch
 {
     text-align: center;
-    font-size: 200%;
+    font-size: 400%;
     color: whitesmoke;
     transition: background-color 0.3s;
     margin: auto;
+    animation: glitchEffect 1s forwards alternate infinite;
 }
 .glitch :hover
 {
-    animation: glitchEffect 1s forwards alternate infinite;
+    font-size: 400%;
 }
 @keyframes glitchEffect
 {
@@ -28,4 +29,20 @@
     {
         text-shadow: cyan 2px 1.5px,red -2px -1.5px;
     }
+}
+.socials
+{
+    background-color: rgb(255, 255, 255) ;opacity: 50%;
+    text-align: center;
+}
+.logo
+{
+    padding: 10px 10px 0px 10px;
+    color: black;
+    background-color: white;
+    text-decoration: none;
+}
+.logo:hover
+{
+    animation: glitchEffect 1s forwards alternate infinite;
 }
