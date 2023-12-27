@@ -1,10 +1,11 @@
 *
 {
     background-color:rgb(42, 41, 41);
+    font-family: 'Roboto', 'Arial', sans-serif;
 }   
 .sayMyName
 {
-    padding: 0px 35%;
+    padding: 0px;
 }
 .glitch
 {
@@ -28,18 +29,40 @@
 }
 .socials
 {
-    background-color: rgb(255, 255, 255) ;opacity: 50%;
+    background-color: rgb(0, 0, 0) ;
     text-align: center;
+
 }
 .logo
 {
     padding: 10px 10px 0px 10px;
     color: black;
-    background-color: white;
+    background-color: rgb(0, 0, 0);
     text-decoration: none;
-}
-.logo:link
+} 
+.logo img
 {
-    size:100px;
-    box-shadow: 20px;
+    border-bottom: 1px white solid;
+    background-color: black;
+    padding: 10px 0px;
+    margin: 0%;
+}
+a:hover img
+{
+    animation: expand 100s ease-in alternate infinite;
+}
+@keyframes expand
+{
+    0%
+    {
+        transform: scale(100%);
+    }
+    0.3%
+    {
+        transform: scale(80%);
+    }
+    100%
+    {
+        transform: scale(80%);
+    }
 }
