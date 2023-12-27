@@ -1,0 +1,31 @@
+*
+{
+    background-color:rgb(42, 41, 41);
+}   
+.sayMyName
+{
+    border-bottom: 2px solid white;
+}
+.glitch
+{
+    text-align: center;
+    font-size: 200%;
+    color: whitesmoke;
+    transition: background-color 0.3s;
+    margin: auto;
+}
+.glitch :hover
+{
+    animation: glitchEffect 1s forwards alternate infinite;
+}
+@keyframes glitchEffect
+{
+    0%
+    {
+        text-shadow: red 3px 5px,cyan -3px -5px;
+    }
+    50%
+    {
+        text-shadow: cyan 2px 1.5px,red -2px -1.5px;
+    }
+}
