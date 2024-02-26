@@ -1,0 +1,33 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+.anta-regular {
+    font-family: "Anta", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+  }
+  .prompt-regular {
+    font-family: "Prompt", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+  }
+  .image-container {
+    display: inline-block;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.1);
+  }
+
+  /* Apply a grayscale filter to the image */
+  .image-container img {
+    width: 100%;
+    height: auto;
+    display: block;
+    filter: grayscale(20%); /* Adjust the percentage to control the amount of grayscale */
+    transition: filter 0.3s ease; /* Add a smooth transition effect */
+  }
+
+  /* Change the grayscale filter on hover */
+  .image-container:hover img {
+    filter: grayscale(0%);
+  }
