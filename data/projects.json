@@ -1,0 +1,20 @@
+{
+  "projects": [
+    {
+      "name": "Shatranj",
+      "language": "C++",
+      "repository": "https://github.com/ItsArnavSh/shatranj",
+      "description": "Chess with GUI and Engine written in C++",
+      "tags": ["Chess", "GUI", "Engine", "C++"],
+      "category": "Systems Engineering",
+      "last_updated": "11-2024",
+      "status": "Completed",
+      "features": [
+        "Full chess engine implementation",
+        "Graphical User Interface for gameplay",
+        "Move validation and game logic",
+        "Support for different game modes"
+      ]
+    }
+  ]
+}
