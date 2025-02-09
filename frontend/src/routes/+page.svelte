@@ -1,7 +1,8 @@
 <script>
 	import { onMount } from 'svelte';
 	import Hero from './Hero.svelte';
-
+	import Projects from './Projects.svelte';
+	import Newsletter from './Newsletter.svelte';
 	let isScrolled = false;
 	let activeSection = 'hero';
 
@@ -62,8 +63,8 @@
 	</section>
 
 	<!-- Projects Section -->
-	<section id="projects" class="flex min-h-screen items-center justify-center">
-		<h2 class="alexandria text-4xl text-gray-800">Projects Section</h2>
+	<section id="projects" class="flex min-h-screen w-full items-center justify-center">
+		<Projects />
 	</section>
 
 	<!-- Blog Section -->
@@ -73,7 +74,7 @@
 
 	<!-- Newsletter Section -->
 	<section id="newsletter" class="flex min-h-screen items-center justify-center">
-		<h2 class="alexandria text-4xl text-gray-800">Newsletter Section</h2>
+		<Newsletter />
 	</section>
 </main>
 
