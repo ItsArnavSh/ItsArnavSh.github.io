@@ -15,6 +15,127 @@
         "Move validation and game logic",
         "Support for different game modes"
       ]
+    },
+    {
+      "name": "Solunox",
+      "language": "C++",
+      "repository": "https://github.com/ItsArnavSh/solunox",
+      "description": "A tree-walking interpreter with no variables and container-based data transfer",
+      "tags": ["Interpreter", "Programming Language", "C++"],
+      "category": "Programming Languages",
+      "last_updated": "11-2024",
+      "status": "Completed",
+      "features": [
+        "Tree-walking interpreter",
+        "No variable storage",
+        "Containers for data transfer",
+        "Minimalist and unique language design"
+      ]
+    },
+    {
+      "name": "Heapster",
+      "language": "C",
+      "repository": "https://github.com/ItsArnavSh/heapster",
+      "description": "Custom malloc implementation in C",
+      "tags": ["Memory Management", "Allocator", "C"],
+      "category": "Systems Programming",
+      "last_updated": "12-2024",
+      "status": "Completed",
+      "features": [
+        "Custom dynamic memory allocation",
+        "Efficient heap management",
+        "Fragmentation handling"
+      ]
+    },
+    {
+      "name": "PokeArcadia",
+      "language": "TypeScript",
+      "repository": "https://github.com/osdc/PokeArcadia",
+      "description": "Canvas-based arcade game built for an event",
+      "tags": ["Game", "Canvas", "React", "TypeScript"],
+      "category": "Web Development",
+      "last_updated": "09-2023",
+      "status": "Completed",
+      "features": [
+        "Canvas-based rendering",
+        "Arcade-style game mechanics",
+        "Developed for a GitHub event"
+      ]
+    },
+    {
+      "name": "BashBrain",
+      "language": "Go",
+      "repository": "https://github.com/ItsArnavSh/bashbrain",
+      "description": "AI-powered terminal assistant using Gemini API",
+      "tags": ["AI", "Golang", "Automation"],
+      "category": "AI & Automation",
+      "last_updated": "01-2025",
+      "status": "Completed",
+      "features": [
+        "Integrates with Gemini API",
+        "Executes shell commands",
+        "Terminal-based AI assistant"
+      ]
+    },
+    {
+      "name": "Academiq",
+      "language": "TypeScript",
+      "repository": "https://github.com/ItsArnavSh/academiq",
+      "description": "Olympiad-style coding platform similar to CodeChef",
+      "tags": ["EdTech", "Next.js", "Firebase"],
+      "category": "Web Development",
+      "last_updated": "01-2025",
+      "status": "Completed",
+      "features": [
+        "Real-time coding challenges",
+        "Firebase-based authentication",
+        "Olympiad-style contest system"
+      ]
+    },
+    {
+      "name": "ChessFastAF",
+      "language": "Svelte + Rust",
+      "repository": "https://github.com/ItsArnavSh/chessfastaf",
+      "description": "WASM-powered two-player chess implementation",
+      "tags": ["Chess", "WASM", "Rust", "Svelte"],
+      "category": "Web & Systems Programming",
+      "last_updated": "11-2024",
+      "status": "Completed",
+      "features": [
+        "Optimized WebAssembly (WASM) performance",
+        "Two-player chess gameplay",
+        "Canvas-based UI"
+      ]
+    },
+    {
+      "name": "Beatbox",
+      "language": "Svelte",
+      "repository": "https://github.com/ItsArnavSh/beatbox",
+      "description": "Converts audio files into cool visual animations",
+      "tags": ["Audio Processing", "Animation", "Svelte"],
+      "category": "Multimedia",
+      "last_updated": "06-2024",
+      "status": "Completed",
+      "features": [
+        "Audio waveform visualization",
+        "Dynamic animation effects",
+        "Supports various audio formats"
+      ]
+    },
+    {
+      "name": "Elevator2",
+      "language": "C++",
+      "repository": "https://github.com/ItsArnavSh/elevator2",
+      "description": "Simulation of the best elevator scheduling algorithm",
+      "tags": ["Simulation", "Algorithms", "C++"],
+      "category": "Systems Programming",
+      "last_updated": "04-2024",
+      "status": "Completed",
+      "features": [
+        "Efficient lift scheduling",
+        "Simulates real-world elevator behavior",
+        "Optimized for multi-floor scenarios"
+      ]
     }
   ]
 }
