@@ -8,7 +8,7 @@
 	];
 </script>
 
-<div class="relative flex min-h-screen bg-white">
+<div class="relative flex min-h-screen w-full bg-white">
 	<!-- Main Content -->
 	<div class="flex w-full flex-col md:flex-row">
 		<!-- Purple Left Side -->
@@ -19,7 +19,7 @@
 				<img
 					src="me.png"
 					alt="Profile"
-					class=" rounded-full object-cover md:relative md:left-32 md:h-max md:w-max"
+					class=" rounded-full object-cover md:relative md:left-8 md:h-max md:w-max"
 				/>
 				<!-- Left-Aligned "I am" -->
 				<h1 class="text-center text-white md:text-left">
