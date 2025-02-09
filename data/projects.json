@@ -106,6 +106,36 @@
         "Two-player chess gameplay",
         "Canvas-based UI"
       ]
+    },
+    {
+      "name": "Beatbox",
+      "language": "Svelte",
+      "repository": "https://github.com/ItsArnavSh/beatbox",
+      "description": "Converts audio files into cool visual animations",
+      "tags": ["Audio Processing", "Animation", "Svelte"],
+      "category": "Multimedia",
+      "last_updated": "06-2024",
+      "status": "Completed",
+      "features": [
+        "Audio waveform visualization",
+        "Dynamic animation effects",
+        "Supports various audio formats"
+      ]
+    },
+    {
+      "name": "Elevator2",
+      "language": "C++",
+      "repository": "https://github.com/ItsArnavSh/elevator2",
+      "description": "Simulation of the best elevator scheduling algorithm",
+      "tags": ["Simulation", "Algorithms", "C++"],
+      "category": "Systems Programming",
+      "last_updated": "04-2024",
+      "status": "Completed",
+      "features": [
+        "Efficient lift scheduling",
+        "Simulates real-world elevator behavior",
+        "Optimized for multi-floor scenarios"
+      ]
     }
   ]
 }
