@@ -1,0 +1,9 @@
+{
+  "blogs": [
+    {
+      "file": "interpreters.md",
+      "date_created": "17-12-2024",
+      "summary": "How interpreters work"
+    }
+  ]
+}
