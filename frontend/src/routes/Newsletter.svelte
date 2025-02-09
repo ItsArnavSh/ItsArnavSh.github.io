@@ -15,7 +15,6 @@
 					<h3 class="alexandria mb-3 text-2xl text-purple-800 md:text-3xl">
 						Join My <span class="font-semibold">Weekly Exploration</span>
 					</h3>
-					<h2 class="anta text-4xl text-purple-700 md:text-5xl">F Around & Find Out</h2>
 				</div>
 
 				<div class="grid items-center gap-12 md:grid-cols-2">
