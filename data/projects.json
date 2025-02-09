@@ -31,6 +31,81 @@
         "Containers for data transfer",
         "Minimalist and unique language design"
       ]
+    },
+    {
+      "name": "Heapster",
+      "language": "C",
+      "repository": "https://github.com/ItsArnavSh/heapster",
+      "description": "Custom malloc implementation in C",
+      "tags": ["Memory Management", "Allocator", "C"],
+      "category": "Systems Programming",
+      "last_updated": "12-2024",
+      "status": "Completed",
+      "features": [
+        "Custom dynamic memory allocation",
+        "Efficient heap management",
+        "Fragmentation handling"
+      ]
+    },
+    {
+      "name": "PokeArcadia",
+      "language": "TypeScript",
+      "repository": "https://github.com/osdc/PokeArcadia",
+      "description": "Canvas-based arcade game built for an event",
+      "tags": ["Game", "Canvas", "React", "TypeScript"],
+      "category": "Web Development",
+      "last_updated": "09-2023",
+      "status": "Completed",
+      "features": [
+        "Canvas-based rendering",
+        "Arcade-style game mechanics",
+        "Developed for a GitHub event"
+      ]
+    },
+    {
+      "name": "BashBrain",
+      "language": "Go",
+      "repository": "https://github.com/ItsArnavSh/bashbrain",
+      "description": "AI-powered terminal assistant using Gemini API",
+      "tags": ["AI", "Golang", "Automation"],
+      "category": "AI & Automation",
+      "last_updated": "01-2025",
+      "status": "Completed",
+      "features": [
+        "Integrates with Gemini API",
+        "Executes shell commands",
+        "Terminal-based AI assistant"
+      ]
+    },
+    {
+      "name": "Academiq",
+      "language": "TypeScript",
+      "repository": "https://github.com/ItsArnavSh/academiq",
+      "description": "Olympiad-style coding platform similar to CodeChef",
+      "tags": ["EdTech", "Next.js", "Firebase"],
+      "category": "Web Development",
+      "last_updated": "01-2025",
+      "status": "Completed",
+      "features": [
+        "Real-time coding challenges",
+        "Firebase-based authentication",
+        "Olympiad-style contest system"
+      ]
+    },
+    {
+      "name": "ChessFastAF",
+      "language": "Svelte + Rust",
+      "repository": "https://github.com/ItsArnavSh/chessfastaf",
+      "description": "WASM-powered two-player chess implementation",
+      "tags": ["Chess", "WASM", "Rust", "Svelte"],
+      "category": "Web & Systems Programming",
+      "last_updated": "11-2024",
+      "status": "Completed",
+      "features": [
+        "Optimized WebAssembly (WASM) performance",
+        "Two-player chess gameplay",
+        "Canvas-based UI"
+      ]
     }
   ]
 }
