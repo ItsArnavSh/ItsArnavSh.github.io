@@ -15,6 +15,22 @@
         "Move validation and game logic",
         "Support for different game modes"
       ]
+    },
+    {
+      "name": "Solunox",
+      "language": "C++",
+      "repository": "https://github.com/ItsArnavSh/solunox",
+      "description": "A tree-walking interpreter with no variables and container-based data transfer",
+      "tags": ["Interpreter", "Programming Language", "C++"],
+      "category": "Programming Languages",
+      "last_updated": "11-2024",
+      "status": "Completed",
+      "features": [
+        "Tree-walking interpreter",
+        "No variable storage",
+        "Containers for data transfer",
+        "Minimalist and unique language design"
+      ]
     }
   ]
 }
