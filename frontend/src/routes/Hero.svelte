@@ -1,12 +1,6 @@
 <script lang="ts">
 	import { fade, scale } from 'svelte/transition';
 
-	const navItems = [
-		{ href: '/newsletter', label: 'Newsletter' },
-		{ href: '/blog', label: 'Blog      ' },
-		{ href: '/projects', label: 'Projects  ' }
-	];
-
 	const socials = [
 		{ href: 'mailto:its.arnav.sh@gmail.com', label: 'Email', icon: 'Mail.png' },
 		{ href: 'https://github.com/itsarnavsh', label: 'GitHub', icon: 'Github.png' },
@@ -15,26 +9,18 @@
 </script>
 
 <div class="relative flex min-h-screen bg-white">
-	<!-- Vertical Navigation -->
-	<nav class="fixed left-4 top-1/2 z-10 flex -translate-y-1/2 flex-col gap-36">
-		{#each navItems as { href, label }}
-			<a
-				{href}
-				class="alexandria -rotate-90 transform whitespace-nowrap text-lg tracking-wide text-gray-700 transition-colors duration-300 hover:text-indigo-500"
-			>
-				{label}
-			</a>
-		{/each}
-	</nav>
-
 	<!-- Main Content -->
 	<div class="flex w-full flex-col md:flex-row">
 		<!-- Purple Left Side -->
-		<div class="mb-10 ml-40 mt-10 flex w-1/2 rounded-xl bg-[#8B8FE5] md:p-20">
+		<div class="mb-10 ml-40 mt-10 flex w-1/3 rounded-xl bg-[#8B8FE5] md:p-20">
 			<div class="flex flex-col">
-				<img src="me.png" alt="Profile" class="relative left-40 h-auto w-full object-cover" />
+				<img
+					src="me.png"
+					alt="Profile"
+					class="relative left-32 h-[400px] w-[400px] rounded-full object-cover"
+				/>
 				<!-- Left-Aligned "I am" -->
-				<h1 class=" text-left text-white">
+				<h1 class="text-left text-white">
 					<span class="inter relative right-[30] block text-8xl tracking-wide md:text-9xl"
 						>I am</span
 					>
@@ -92,7 +78,7 @@
 						in:scale={{ duration: 300, delay: 300 }}
 					>
 						<span class="sr-only">{label}</span>
-						<img src={icon} alt={label} />
+						<img src={icon || '/placeholder.svg'} alt={label} />
 					</a>
 				{/each}
 			</div>
