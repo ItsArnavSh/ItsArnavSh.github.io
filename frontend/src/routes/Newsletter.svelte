@@ -1,7 +1,3 @@
-<script>
-	// Svelte component logic here if needed
-</script>
-
 <div class="min-h-screen bg-gradient-to-b from-purple-100 to-white">
 	<div class="container mx-auto px-4 py-16">
 		<div class="mb-16 text-center">
