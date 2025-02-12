@@ -1,4 +1,5 @@
 <script>
+	import { injectAnalytics } from '@vercel/analytics/sveltekit';
 	import { onMount } from 'svelte';
 	import Hero from './Hero.svelte';
 	import Projects from './Projects.svelte';
@@ -9,6 +10,7 @@
 	let activeSection = 'hero';
 
 	onMount(() => {
+		injectAnalytics();
 		window.addEventListener('scroll', () => {
 			isScrolled = window.scrollY > 20;
 
