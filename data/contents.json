@@ -4,6 +4,11 @@
       "file": "interpreters.md",
       "date_created": "17-12-2024",
       "summary": "How interpreters work"
+    },
+    {
+      "file": "GitFindr.md",
+      "date_created": "24-12-2025",
+      "summary": "Github Search Sucks - So I made my own"
     }
   ]
 }
