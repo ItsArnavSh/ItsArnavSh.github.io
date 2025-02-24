@@ -1,6 +1,21 @@
 {
   "projects": [
     {
+      "name": "GitFindr",
+      "language": "Go",
+      "repository": "https://github.com/ItsArnavSh/gitfindr",
+      "description": "The Google For Github",
+      "tags": ["React", "Python", "Fastapi", "Redis", "Go"],
+      "category": "Systems Engineering",
+      "last_updated": "2-2025",
+      "status": "Completed",
+      "features": [
+        "Search Engine implemented from Scratch",
+        "Modified the original BM25 for practical and efficient retrieval",
+        "Redis used to for csching synonyms"
+      ]
+    },
+    {
       "name": "Shatranj",
       "language": "C++",
       "repository": "https://github.com/ItsArnavSh/shatranj",
