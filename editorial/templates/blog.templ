@@ -1,0 +1,14 @@
+
+package templates
+
+templ PostPage(title string, htmlContent string) {
+	<html>
+		<head><title>{ title }</title></head>
+		<body>
+			<h1>{ title }</h1>
+			<div class="post-content">
+				@templ.Raw(htmlContent)
+			</div>
+		</body>
+	</html>
+}
