@@ -156,6 +156,7 @@
         const coverPreview = $("[data-cover-preview]");
         const coverUpload = $("[data-cover-upload]");
         const bodyUpload = $("[data-body-upload]");
+        const pasteButton = $("[data-paste-image]");
         const mediaUpload = $("[data-media-upload]");
         const mediaGrid = $("[data-media-grid]");
         const mediaEmpty = $("[data-media-empty]");
@@ -461,6 +462,54 @@
             return data;
         }
 
+        async function uploadAndInsertImage(file, alt) {
+            if (!file || !body) return false;
+            const data = await uploadFile(file);
+            if (!data) return false;
+            const caption = alt || prettyMediaAlt(data.name || file.name || "image");
+            rememberMedia(data, true, caption);
+            insertText("\n![" + caption + "](" + data.url + ")\n");
+            return true;
+        }
+
+        function clipboardImageFiles(data) {
+            const files = [];
+            if (!data) return files;
+            if (data.files && data.files.length) {
+                Array.from(data.files).forEach((file) => {
+                    if (file && file.type && file.type.startsWith("image/")) files.push(file);
+                });
+            }
+            if (!files.length && data.items) {
+                Array.from(data.items).forEach((item) => {
+                    if (item.kind === "file" && item.type && item.type.startsWith("image/")) {
+                        const file = item.getAsFile();
+                        if (file) files.push(file);
+                    }
+                });
+            }
+            return files;
+        }
+
+        async function insertPastedImages(files) {
+            const images = Array.from(files || []).filter((file) => file && file.type && file.type.startsWith("image/"));
+            if (!images.length) {
+                toast("The clipboard does not contain an image. Copy an image or take a screenshot first.");
+                return;
+            }
+            let inserted = 0;
+            for (let i = 0; i < images.length; i += 1) {
+                toast(images.length > 1
+                    ? "Uploading pasted image " + (i + 1) + " of " + images.length + "…"
+                    : "Uploading pasted image…");
+                const alt = images.length > 1 ? "pasted image " + (i + 1) : "pasted image";
+                if (await uploadAndInsertImage(images[i], alt)) inserted += 1;
+            }
+            if (inserted) {
+                toast(inserted === 1 ? "Pasted image inserted" : "Inserted " + inserted + " pasted images");
+            }
+        }
+
         /* Media library */
         const mediaItems = [];
 
@@ -598,14 +647,59 @@
                 const file = bodyUpload.files && bodyUpload.files[0];
                 if (!file) return;
                 toast("Uploading image…");
-                const data = await uploadFile(file);
-                if (data && body) {
-                    const alt = (file.name || "image").replace(/\.[^.]+$/, "").replace(/[-_]+/g, " ");
-                    rememberMedia(data, true, alt);
-                    insertText("\n![" + alt + "](" + data.url + ")\n");
-                    toast("Image inserted");
-                }
+                const alt = (file.name || "image").replace(/\.[^.]+$/, "").replace(/[-_]+/g, " ");
+                if (await uploadAndInsertImage(file, alt)) toast("Image inserted");
                 bodyUpload.value = "";
+            });
+        }
+
+        if (pasteButton) {
+            pasteButton.addEventListener("click", async () => {
+                if (!navigator.clipboard || typeof navigator.clipboard.read !== "function") {
+                    toast("This browser cannot read images from the clipboard. Press Ctrl/Cmd+V in the editor instead.");
+                    if (body) body.focus();
+                    return;
+                }
+                toast("Reading clipboard…");
+                let items;
+                try {
+                    items = await navigator.clipboard.read();
+                } catch (e) {
+                    const blocked = e && (e.name === "NotAllowedError" || e.name === "SecurityError");
+                    toast(blocked
+                        ? "Clipboard access was blocked. Allow it, or press Ctrl/Cmd+V in the editor."
+                        : "Could not read the clipboard. Press Ctrl/Cmd+V in the editor instead.");
+                    if (body) body.focus();
+                    return;
+                }
+                const files = [];
+                for (const item of items) {
+                    const type = (item.types || []).find((t) => /^image\/(jpeg|png|webp|gif)$/.test(t));
+                    if (!type) continue;
+                    try {
+                        const blob = await item.getType(type);
+                        const ext = type === "image/jpeg" ? "jpg" : type.split("/")[1];
+                        files.push(new File([blob], "clipboard-" + Date.now() + "-" + files.length + "." + ext, { type }));
+                    } catch (e) {
+                        /* Ignore items that cannot be read and try the next one. */
+                    }
+                }
+                if (!files.length) {
+                    toast("The clipboard does not contain a JPEG, PNG, WebP or GIF image.");
+                    if (body) body.focus();
+                    return;
+                }
+                await insertPastedImages(files);
+                if (body) body.focus();
+            });
+        }
+
+        if (body) {
+            body.addEventListener("paste", (e) => {
+                const files = clipboardImageFiles(e.clipboardData);
+                if (!files.length) return;
+                e.preventDefault();
+                insertPastedImages(files).then(() => body.focus());
             });
         }
 
