@@ -64,7 +64,6 @@ func (a *App) routes() {
 	mux.HandleFunc("GET /devlog/{slug}", a.handlePost)
 	mux.HandleFunc("GET /journal/{slug}", a.handlePost)
 	mux.HandleFunc("GET /search", a.handleSearch)
-	mux.HandleFunc("GET /about", a.handleAbout)
 	mux.HandleFunc("GET /sitemap.xml", a.handleSitemap)
 	mux.HandleFunc("GET /robots.txt", a.handleRobots)
 	mux.HandleFunc("GET /download/{blog}/{file}", a.handleDownload)
@@ -110,7 +109,7 @@ func (a *App) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 	// Normalise a few trailing-slash URLs without a round trip for every path.
 	if r.Method == http.MethodGet {
 		switch {
-		case r.URL.Path == "/devlog/", r.URL.Path == "/journal/", r.URL.Path == "/search/", r.URL.Path == "/about/", r.URL.Path == "/admin/":
+		case r.URL.Path == "/devlog/", r.URL.Path == "/journal/", r.URL.Path == "/search/", r.URL.Path == "/admin/":
 			http.Redirect(w, r, strings.TrimSuffix(r.URL.Path, "/"), http.StatusMovedPermanently)
 			return
 		}

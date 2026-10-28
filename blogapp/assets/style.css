@@ -588,7 +588,6 @@ body:not(.colour-mode).theme-dark {
    ============================================================ */
 .front-wrap,
 .search-wrap,
-.about-wrap,
 .error-wrap {
     width: min(100% - 64px, var(--wrap));
     margin: 0 auto;
@@ -1068,11 +1067,6 @@ body:not(.colour-mode).theme-dark {
 }
 .empty-paper p {
     color: var(--muted);
-}
-.empty-paper a {
-    color: var(--accent);
-    text-decoration: underline;
-    text-underline-offset: 3px;
 }
 
 /* ============================================================
@@ -2043,130 +2037,6 @@ body:not(.colour-mode).theme-dark {
 }
 
 /* ============================================================
-   About
-   ============================================================ */
-.about-head {
-    max-width: 900px;
-    margin-top: 34px;
-    padding-top: 22px;
-    border-top: 2px solid var(--ink);
-}
-.about-head h1 {
-    margin: 12px 0 18px;
-    font-size: clamp(3.2rem, 7vw, 6.4rem);
-    line-height: 0.9;
-    letter-spacing: -0.05em;
-}
-.about-deck {
-    max-width: 62ch;
-    font-style: italic;
-    font-size: 1.2rem;
-    line-height: 1.5;
-    color: var(--muted);
-}
-.about-grid {
-    display: grid;
-    grid-template-columns: minmax(0, 1.45fr) minmax(280px, 0.55fr);
-    gap: 64px;
-    margin-top: 38px;
-    padding-top: 34px;
-    border-top: 1px solid var(--rule);
-}
-.about-body.prose {
-    text-align: left;
-    font-size: 1.1rem;
-}
-.about-body.prose > p:first-of-type::first-letter {
-    float: none;
-    font-size: inherit;
-    color: inherit;
-    padding: 0;
-    line-height: inherit;
-}
-.about-side {
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
-}
-.about-card {
-    border: 1px solid var(--rule);
-    background: var(--paper-2);
-    padding: 20px;
-}
-.about-card .seal.large {
-    width: 54px;
-    height: 54px;
-    font-size: 27px;
-    margin-bottom: 12px;
-}
-.about-card h3 {
-    font-size: 1.35rem;
-    margin-bottom: 6px;
-}
-.about-card p {
-    font-size: 0.9rem;
-    line-height: 1.55;
-    color: var(--muted);
-}
-.about-card-label {
-    display: block;
-    margin-bottom: 10px;
-    font-family: var(--font-mono);
-    font-size: 8.5px;
-    text-transform: uppercase;
-    letter-spacing: 0.16em;
-    color: var(--accent);
-}
-.edition-card {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    padding: 11px 0;
-    border-top: 1px solid var(--rule);
-}
-.edition-card:first-of-type {
-    border-top: 0;
-}
-.edition-card span:nth-child(2) {
-    display: flex;
-    flex-direction: column;
-    gap: 2px;
-}
-.edition-card b {
-    font-family: var(--font-display);
-    font-size: 1.05rem;
-    font-weight: 600;
-    color: var(--ink);
-}
-.edition-card small {
-    font-family: var(--font-mono);
-    font-size: 8px;
-    text-transform: uppercase;
-    letter-spacing: 0.08em;
-    color: var(--quiet);
-}
-.edition-card > span:last-child {
-    margin-left: auto;
-    color: var(--accent);
-}
-.about-links {
-    display: flex;
-    flex-direction: column;
-    gap: 5px;
-    margin-top: 12px;
-}
-.about-links a {
-    font-family: var(--font-mono);
-    font-size: 9px;
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
-    color: var(--muted);
-}
-.about-links a:hover {
-    color: var(--accent);
-}
-
-/* ============================================================
    404
    ============================================================ */
 .error-wrap {
@@ -2276,12 +2146,6 @@ body:not(.colour-mode).theme-dark {
 }
 .footer-mark span {
     color: var(--ink);
-}
-.footer-brand p {
-    max-width: 32ch;
-    font-size: 0.9rem;
-    line-height: 1.55;
-    color: var(--muted);
 }
 .footer-stamp {
     display: block;
@@ -2463,17 +2327,6 @@ body:not(.colour-mode).theme-dark {
     .related-grid {
         grid-template-columns: repeat(2, minmax(0, 1fr));
     }
-    .about-grid {
-        grid-template-columns: 1fr;
-        gap: 34px;
-    }
-    .about-side {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-    }
-    .about-card:first-child {
-        grid-column: 1 / -1;
-    }
     .search-idle {
         grid-template-columns: 1fr;
         gap: 36px;
@@ -2503,7 +2356,6 @@ body:not(.colour-mode).theme-dark {
     .front-wrap,
     .article-wrap,
     .search-wrap,
-    .about-wrap,
     .error-wrap,
     .site-footer {
         width: calc(100% - 36px);
@@ -2687,15 +2539,6 @@ body:not(.colour-mode).theme-dark {
     }
     .result-row h2 {
         font-size: 1.42rem;
-    }
-    .about-head h1 {
-        font-size: clamp(2.9rem, 13vw, 4.4rem);
-    }
-    .about-side {
-        grid-template-columns: 1fr;
-    }
-    .about-card:first-child {
-        grid-column: auto;
     }
     .footer-grid {
         grid-template-columns: 1fr 1fr;

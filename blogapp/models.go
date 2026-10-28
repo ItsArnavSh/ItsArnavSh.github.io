@@ -39,7 +39,6 @@ var blogCatalog = map[string]BlogInfo{
 		Masthead:    "JOURNAL",
 		MastheadA:   "JOUR",
 		MastheadB:   "NAL",
-		Tagline:     "A slower kind of internet",
 		Description: "Field notes, photographs and small essays. The personal edition of Arnav's desk.",
 		Theme:       "light",
 		Path:        "/journal",

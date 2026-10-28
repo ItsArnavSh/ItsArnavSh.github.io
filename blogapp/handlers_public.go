@@ -210,11 +210,6 @@ func validBlogFilter(v string) string {
 	return ""
 }
 
-func (a *App) handleAbout(w http.ResponseWriter, r *http.Request) {
-	data := a.basePage("journal", "/about", "About this paper — ARNΛV", "Two editions, one desk. How ARNΛV is written, printed and kept.")
-	a.renderPage(w, "about", data, http.StatusOK)
-}
-
 func (a *App) handleFeed(w http.ResponseWriter, r *http.Request) {
 	blogKey := ""
 	p := "/feed.xml"
