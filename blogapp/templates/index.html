@@ -80,6 +80,7 @@
   </section>
   {{end}}
 
+  {{if .TotalPosts}}
   <section class="lower-grid">
     <div class="most-read">
       <div class="section-rule compact"><h2>Most read</h2><span>All time</span></div>
@@ -108,6 +109,7 @@
       </div>
     </div>
   </section>
+  {{end}}
 
   {{if not .Lead}}
   <section class="empty-paper">
