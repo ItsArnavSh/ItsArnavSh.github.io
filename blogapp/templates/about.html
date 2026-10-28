@@ -1,0 +1,49 @@
+{{define "content"}}
+<div class="about-wrap">
+  <header class="about-head">
+    <span class="kicker">About this paper</span>
+    <h1>Two editions,<br>one desk.</h1>
+    <p class="about-deck">ARNΛV is a small, independent publication written by Arnav Sharma: two editions, one desk, and no algorithm between you and the page.</p>
+  </header>
+
+  <div class="about-grid">
+    <div class="about-body prose">
+      <p>There are two editions. The <a href="/devlog">Devlog</a> is the technical one: build notes, systems work, post-mortems, things that broke at 2 a.m. and the occasional graph. The <a href="/journal">Journal</a> is the personal one: field notes, photographs, small essays and the slower parts of a life spent online.</p>
+      <p>They share a printing press but not a mood. The Devlog is set in dark ink and burnt orange; the Journal is warm paper and brown. Both are arranged like a newspaper, because a front page asks you to choose what to read instead of feeding you an infinite column.</p>
+      <h2>The shape of it</h2>
+      <p>There are two editions and one archive. The front page asks you to choose what to read; it ends. Every dispatch is searchable, and each one can be taken with you as a file or read in your own reader. There are no comments and no tracking pixels — only a view count that forgets who you are after the day is over.</p>
+      <h2>Take it with you</h2>
+      <p>Every dispatch can be downloaded as Markdown, HTML, EPUB, plain text or JSON, and the print view becomes a PDF in one click. The feeds are open: <a href="/devlog/feed.xml">Devlog RSS</a> and <a href="/journal/feed.xml">Journal RSS</a>.</p>
+      <h2>The editor</h2>
+      <p>The editor's desk is at <a href="/admin">/admin</a>. It signs in through GitHub as the paper's owner and nothing else. If you are here to read, you are in the right place.</p>
+    </div>
+    <aside class="about-side">
+      <div class="about-card">
+        <span class="seal large" aria-hidden="true">A</span>
+        <h3>Arnav Sharma</h3>
+        <p>Pre-final year CSE student, occasional systems programmer, full-time over-thinker.</p>
+        <a href="https://github.com/ItsArnavSh" class="text-link">GitHub →</a>
+      </div>
+      <div class="about-card">
+        <span class="about-card-label">The editions</span>
+        {{range .Blogs}}
+        <a class="edition-card" href="{{.Path}}">
+          <span class="edition-dot {{.Theme}}"></span>
+          <span><b>{{.Name}}</b><small>{{.Tagline}}</small></span>
+          <span aria-hidden="true">→</span>
+        </a>
+        {{end}}
+      </div>
+      <div class="about-card">
+        <span class="about-card-label">Feeds</span>
+        <p>Read in your own reader. No algorithm involved.</p>
+        <div class="about-links">
+          <a href="/devlog/feed.xml">Devlog RSS</a>
+          <a href="/journal/feed.xml">Journal RSS</a>
+          <a href="/feed.xml">Everything</a>
+        </div>
+      </div>
+    </aside>
+  </div>
+</div>
+{{end}}

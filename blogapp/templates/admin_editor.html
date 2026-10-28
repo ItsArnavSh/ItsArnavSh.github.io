@@ -1,0 +1,173 @@
+{{define "content"}}
+<div class="editor-page">
+  <header class="editor-head">
+    <div>
+      <a class="back-link" href="/admin">← All dispatches</a>
+      <h1>{{if .Post}}Edit dispatch{{else}}New dispatch{{end}}</h1>
+      <p>{{if .Post}}Last saved {{datePtr .Post.UpdatedAt}}{{else}}A blank page, a fresh edition.{{end}}</p>
+    </div>
+    <div class="editor-head-actions">
+      {{if and .Editing (eq .Post.Status "published")}}<a class="button ghost" href="{{.Post.URL}}" target="_blank" rel="noopener">View live ↗</a>{{end}}
+      <button class="button" type="submit" form="post-form">Save dispatch</button>
+    </div>
+  </header>
+
+  {{if .Error}}<div class="notice error">{{.Error}}</div>{{end}}
+  {{if .Flash}}<div class="notice success">{{.Flash}}</div>{{end}}
+
+  <form id="post-form" class="editor-form" method="post" action="{{if .Editing}}/admin/posts/{{.Post.ID}}{{else}}/admin/posts{{end}}"
+    data-upload-url="/admin/upload" data-preview-url="/admin/preview" data-blog="{{if .Post}}{{.Post.Blog}}{{else}}devlog{{end}}">
+    <input type="hidden" name="csrf" value="{{.CSRF}}">
+
+    <div class="editor-layout">
+      <div class="editor-main">
+        <div class="field field-title">
+          <label for="title">Headline</label>
+          <input id="title" name="title" type="text" value="{{if .Post}}{{.Post.Title}}{{end}}" placeholder="A headline worth setting in 96 point type" required autofocus>
+        </div>
+
+        <div class="field-row">
+          <div class="field">
+            <label for="subtitle">Deck / subtitle</label>
+            <input id="subtitle" name="subtitle" type="text" value="{{if .Post}}{{.Post.Subtitle}}{{end}}" placeholder="The line under the headline">
+          </div>
+          <div class="field">
+            <label for="slug">URL slug</label>
+            <input id="slug" name="slug" type="text" value="{{if .Post}}{{.Post.Slug}}{{end}}" placeholder="auto-generated-from-the-title" data-slug-input>
+          </div>
+        </div>
+
+        <div class="field">
+          <label for="excerpt">Excerpt <span class="hint">Used on the front page, search results and feeds.</span></label>
+          <textarea id="excerpt" name="excerpt" rows="2" placeholder="A short summary. Leave blank and one will be cut from the body.">{{if .Post}}{{.Post.Excerpt}}{{end}}</textarea>
+        </div>
+
+        <div class="cover-field">
+          <div class="field">
+            <label for="cover_image">Cover image <span class="hint">Paste a URL or upload.</span></label>
+            <input id="cover_image" name="cover_image" type="text" value="{{if .Post}}{{.Post.CoverImage}}{{end}}" placeholder="/media/… or https://…" data-cover-input>
+          </div>
+          <div class="field">
+            <label for="cover_alt">Cover caption / alt text</label>
+            <input id="cover_alt" name="cover_alt" type="text" value="{{if .Post}}{{.Post.CoverAlt}}{{end}}" placeholder="What is happening in the photograph?">
+          </div>
+          <div class="cover-actions">
+            <label class="button ghost small upload-label">Upload cover<input type="file" accept="image/jpeg,image/png,image/webp,image/gif" data-cover-upload></label>
+            <div class="cover-preview{{if not .Post.CoverImage}} empty{{end}}" data-cover-preview>
+              {{if .Post.CoverImage}}<img src="{{.Post.CoverImage}}" alt="">{{else}}<span>No cover selected</span>{{end}}
+            </div>
+          </div>
+        </div>
+
+        <div class="field body-field">
+          <div class="body-label-row">
+            <label for="body_md">Body <span class="hint">Markdown · LaTeX with $…$ or $$…$$ · images via /media/</span></label>
+            <div class="view-toggle" role="group" aria-label="Editor view">
+              <button type="button" data-view="write">Write</button>
+              <button type="button" data-view="split" class="active">Split</button>
+              <button type="button" data-view="preview">Preview</button>
+            </div>
+          </div>
+          <div class="md-toolbar" role="toolbar" aria-label="Markdown formatting">
+            <button type="button" data-md="h2" title="Heading">H2</button>
+            <button type="button" data-md="bold" title="Bold"><b>B</b></button>
+            <button type="button" data-md="italic" title="Italic"><i>I</i></button>
+            <button type="button" data-md="quote" title="Blockquote">“”</button>
+            <button type="button" data-md="link" title="Link">link</button>
+            <button type="button" data-md="image" title="Image">img</button>
+            <button type="button" data-md="code" title="Code block">code</button>
+            <button type="button" data-md="math" title="Display math">∑</button>
+            <button type="button" data-md="list" title="List">list</button>
+            <button type="button" data-md="rule" title="Horizontal rule">—</button>
+            <label class="toolbar-upload">upload image<input type="file" accept="image/jpeg,image/png,image/webp,image/gif" data-body-upload></label>
+          </div>
+          <div class="editor-split" data-editor-split>
+            <textarea id="body_md" name="body_md" class="md-input" placeholder="# Start writing…" data-md-input>{{if .Post}}{{.Post.BodyMD}}{{end}}</textarea>
+            <div class="md-preview prose" data-preview>
+              <div class="preview-placeholder">Preview appears here as you type.</div>
+            </div>
+          </div>
+          <div class="editor-status">
+            <span data-word-count>0 words</span>
+            <span data-save-status>Local draft saved</span>
+            <span>Drop images anywhere in the editor to upload.</span>
+          </div>
+        </div>
+      </div>
+
+      <aside class="editor-side">
+        <div class="side-card">
+          <h3>Publication</h3>
+          <div class="field">
+            <label for="blog">Edition</label>
+            <select id="blog" name="blog">
+              <option value="devlog"{{if and .Post (eq .Post.Blog "devlog")}} selected{{end}}{{if not .Post}} selected{{end}}>Devlog — dark ink</option>
+              <option value="journal"{{if and .Post (eq .Post.Blog "journal")}} selected{{end}}>Journal — warm paper</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="status">Status</label>
+            <select id="status" name="status">
+              <option value="draft"{{if and .Post (eq .Post.Status "draft")}} selected{{end}}{{if not .Post}} selected{{end}}>Draft</option>
+              <option value="published"{{if and .Post (eq .Post.Status "published")}} selected{{end}}>Published</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="published_at">Publish date <span class="hint">Leave blank to use now.</span></label>
+            <input id="published_at" name="published_at" type="datetime-local" value="{{if and .Post .Post.HasPublishedAt}}{{dateInput .Post.PublishedAt}}{{end}}">
+          </div>
+          <label class="check-row"><input type="checkbox" name="featured" value="1"{{if and .Post .Post.Featured}} checked{{end}}> Feature on the front page</label>
+        </div>
+
+        <div class="side-card">
+          <h3>Images</h3>
+          <label class="button ghost small upload-label media-upload">Upload images<input type="file" accept="image/jpeg,image/png,image/webp,image/gif" multiple data-media-upload></label>
+          <div class="media-grid" data-media-grid>
+            <p class="media-empty" data-media-empty>No images yet. Upload one here, or drop an image anywhere in the editor.</p>
+          </div>
+          <p class="media-help">Click a thumbnail to insert it at your cursor.</p>
+        </div>
+
+        <div class="side-card">
+          <h3>Metadata</h3>
+          <div class="field">
+            <label for="tags">Tags <span class="hint">Comma separated, max 8.</span></label>
+            <input id="tags" name="tags" type="text" value="{{if .Post}}{{join .Post.Tags ", "}}{{end}}" placeholder="Go, Postgres, Notes">
+          </div>
+          <div class="field">
+            <label for="author">Byline</label>
+            <input id="author" name="author" type="text" value="{{if .Post}}{{.Post.Author}}{{else}}Arnav Sharma{{end}}">
+          </div>
+        </div>
+
+        <div class="side-card">
+          <h3>Markdown cheatsheet</h3>
+          <dl class="cheatsheet">
+            <dt># Heading</dt><dd>section head</dd>
+            <dt>**bold**</dt><dd>strong</dd>
+            <dt>[text](url)</dt><dd>link</dd>
+            <dt>![alt](url)</dt><dd>image</dd>
+            <dt>$x^2$</dt><dd>inline math</dd>
+            <dt>$$ \int x $$</dt><dd>display math</dd>
+            <dt>```go</dt><dd>code block</dd>
+          </dl>
+        </div>
+
+        {{if .Editing}}
+        <div class="side-card danger-card">
+          <h3>Danger zone</h3>
+          <p>Deleting removes the dispatch from the archive, its views and its URL. It cannot be undone.</p>
+          <button class="button danger small" type="submit" form="delete-form" data-confirm="Delete this dispatch permanently?">Delete dispatch</button>
+        </div>
+        {{end}}
+      </aside>
+    </div>
+  </form>
+
+  {{if .Editing}}
+  <form id="delete-form" method="post" action="/admin/posts/{{.Post.ID}}/delete" data-confirm-form>
+    <input type="hidden" name="csrf" value="{{.CSRF}}">
+  </form>
+  {{end}}
+</div>
+{{end}}

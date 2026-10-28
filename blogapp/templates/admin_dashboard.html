@@ -1,0 +1,100 @@
+{{define "content"}}
+<div class="admin-dash">
+  <header class="admin-head">
+    <div>
+      <span class="kicker">Dispatch desk</span>
+      <h1>Good {{if lt (nowHour .Now) 12}}morning{{else if lt (nowHour .Now) 17}}afternoon{{else}}evening{{end}}, Arnav.</h1>
+      <p>Everything that has gone to press, and everything still on the spike.</p>
+    </div>
+    <div class="admin-head-actions">
+      <a class="button" href="/admin/posts/new">+ New dispatch</a>
+      <a class="button ghost" href="/admin/export">Export .md</a>
+    </div>
+  </header>
+
+  {{if .Flash}}<div class="notice success">{{.Flash}}</div>{{end}}
+
+  <section class="stat-grid">
+    {{range .Stats.Blogs}}
+    <article class="stat-card">
+      <span class="stat-label">{{.Name}}</span>
+      <strong>{{.Published}}</strong>
+      <span class="stat-sub">{{.Posts}} total · {{.Drafts}} drafts</span>
+      <span class="stat-views">{{views .Views}} {{viewWord .Views}}</span>
+      <a href="/admin?blog={{.Key}}">Manage {{.Name}} →</a>
+    </article>
+    {{end}}
+    <article class="stat-card accent">
+      <span class="stat-label">Total audience</span>
+      <strong>{{views .Stats.TotalViews}}</strong>
+      <span class="stat-sub">across all dispatches</span>
+      <span class="stat-views">{{.Stats.Published}} published · {{.Stats.Drafts}} drafts</span>
+      <a href="/admin">All dispatches →</a>
+    </article>
+  </section>
+
+  <section class="chart-card">
+    <div class="chart-head">
+      <div><span class="kicker">Last 14 days</span><h2>Views by day</h2></div>
+      <span class="chart-total">{{views .Stats.TotalViews}} lifetime {{viewWord .Stats.TotalViews}}</span>
+    </div>
+    <div class="bar-chart" role="img" aria-label="Views per day for the last fourteen days">
+      {{range .Stats.Days}}
+      <div class="bar-col" title="{{.Label}}: {{.Count}} {{viewWord .Count}}">
+        <span class="bar" style="height:{{.Pct}}%"></span>
+        <span class="bar-label">{{.Label}}</span>
+      </div>
+      {{end}}
+    </div>
+  </section>
+
+  <section class="dispatch-table-card">
+    <div class="table-head">
+      <div>
+        <span class="kicker">The spike</span>
+        <h2>All dispatches</h2>
+      </div>
+      <form class="admin-filter" method="get" action="/admin">
+        <input type="search" name="q" value="{{.Query}}" placeholder="Filter by title, tag or body…">
+        <select name="blog">
+          <option value="">Both editions</option>
+          <option value="devlog"{{if eq .FilterBlog "devlog"}} selected{{end}}>Devlog</option>
+          <option value="journal"{{if eq .FilterBlog "journal"}} selected{{end}}>Journal</option>
+        </select>
+        <button class="button small" type="submit">Filter</button>
+      </form>
+    </div>
+
+    {{if .Posts}}
+    <div class="table-scroll">
+      <table class="dispatch-table">
+        <thead><tr><th>Dispatch</th><th>Edition</th><th>Status</th><th>Views</th><th>Updated</th><th></th></tr></thead>
+        <tbody>
+          {{range .Posts}}
+          <tr>
+            <td>
+              <a class="table-title" href="/admin/posts/{{.ID}}">{{.Title}}</a>
+              <span class="table-slug">/{{.Blog}}/{{.Slug}}</span>
+            </td>
+            <td><span class="edition-pill {{.Blog}}">{{.BlogName}}</span></td>
+            <td><span class="status-pill {{.Status}}">{{.Status}}</span></td>
+            <td>{{views .Views}}</td>
+            <td>{{datePtr .UpdatedAt}}</td>
+            <td class="table-actions">
+              <a href="/admin/posts/{{.ID}}">Edit</a>
+              {{if eq .Status "published"}}<a href="{{.URL}}" target="_blank" rel="noopener">View</a>{{end}}
+            </td>
+          </tr>
+          {{end}}
+        </tbody>
+      </table>
+    </div>
+    {{else}}
+    <div class="table-empty">
+      <p>No dispatches match that filter.</p>
+      <a class="button small" href="/admin/posts/new">Write the first one</a>
+    </div>
+    {{end}}
+  </section>
+</div>
+{{end}}

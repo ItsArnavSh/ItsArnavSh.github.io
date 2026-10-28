@@ -1,0 +1,21 @@
+{{define "feed.xml"}}<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>{{xmlEscape .Title}}</title>
+    <link>{{abs .Path}}</link>
+    <description>{{xmlEscape .Description}}</description>
+    <language>en</language>
+    <lastBuildDate>{{dateRFC822 .Now}}</lastBuildDate>
+    <atom:link href="{{abs .FeedPath}}" rel="self" type="application/rss+xml"/>
+    {{range .Posts}}
+    <item>
+      <title>{{xmlEscape .Title}}</title>
+      <link>{{abs .URL}}</link>
+      <guid isPermaLink="true">{{abs .URL}}</guid>
+      <pubDate>{{dateRFC822 .PublishedAt}}</pubDate>
+      <description>{{xmlEscape .Excerpt}}</description>
+      <content:encoded><![CDATA[{{.BodyHTML}}]]></content:encoded>
+    </item>
+    {{end}}
+  </channel>
+</rss>{{end}}

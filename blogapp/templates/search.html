@@ -1,0 +1,77 @@
+{{define "content"}}
+<div class="search-wrap">
+  <header class="search-head">
+    <span class="kicker">The archive</span>
+    <h1>Search every dispatch.</h1>
+    <p>Search both editions. Try a phrase, a tag, a person, or the name of a half-finished side project.</p>
+    <form class="big-search" action="/search" method="get" role="search" aria-keyshortcuts="Control+K Meta+K">
+      <label class="sr-only" for="q-main">Search dispatches</label>
+      <input id="q-main" type="search" name="q" value="{{.SearchQuery}}" placeholder="Search the archive…" autofocus data-search-input aria-keyshortcuts="Control+K Meta+K">
+      {{if .SearchBlog}}<input type="hidden" name="blog" value="{{.SearchBlog}}">{{end}}
+      <button type="submit">Search</button>
+    </form>
+    <div class="search-filters" role="group" aria-label="Filter by edition">
+      <a href="/search?q={{.SearchQuery}}" class="{{if eq .SearchBlog ""}}active{{end}}">All editions</a>
+      <a href="/search?q={{.SearchQuery}}&blog=devlog" class="{{if eq .SearchBlog "devlog"}}active{{end}}">Devlog</a>
+      <a href="/search?q={{.SearchQuery}}&blog=journal" class="{{if eq .SearchBlog "journal"}}active{{end}}">Journal</a>
+    </div>
+  </header>
+
+  {{if .SearchQuery}}
+  <div class="results-head">
+    <span class="results-count">{{len .SearchResults}} {{if eq (len .SearchResults) 1}}dispatch{{else}}dispatches{{end}}</span>
+    <span>for “{{.SearchQuery}}”{{if .SearchBlog}} in the {{(blog .SearchBlog).Name}} edition{{end}}</span>
+  </div>
+  {{if .SearchResults}}
+  <div class="results-list">
+    {{range .SearchResults}}
+    <article class="result-row">
+      <div class="result-kicker">
+        <span class="kicker">{{.Blog}}</span>
+        <span class="kicker-muted">{{date .PublishedAt}}</span>
+        <span class="kicker-muted">{{reading .ReadingMinutes}}</span>
+      </div>
+      <h2><a href="{{.URL}}">{{.Title}}</a></h2>
+      {{with .Subtitle}}<p class="result-deck">{{.}}</p>{{end}}
+      <p class="result-snippet">{{.SnippetHTML}}</p>
+      <div class="result-foot">
+        <a href="{{.URL}}">Read dispatch →</a>
+        <span>{{views .Views}} {{viewWord .Views}}</span>
+        {{with .CoverImage}}<span class="result-has-image">Illustrated</span>{{end}}
+      </div>
+    </article>
+    {{end}}
+  </div>
+  {{else}}
+  <div class="no-results">
+    <span class="empty-kicker">Nothing in the clippings</span>
+    <h2>No dispatches found.</h2>
+    <p>Try a broader phrase, or browse the edition directly.</p>
+    <div class="no-results-links">
+      <a href="/devlog">Read the Devlog</a>
+      <a href="/journal">Read the Journal</a>
+    </div>
+  </div>
+  {{end}}
+  {{else}}
+  <div class="search-idle">
+    <div class="search-idle-block">
+      <span class="empty-kicker">Start here</span>
+      <h2>Browse the most-read dispatches.</h2>
+      <ol class="rank-list">
+        {{range $i, $p := .Trending}}
+        <li><span class="rank">{{printf "%02d" (add $i 1)}}</span><div><a href="{{$p.URL}}">{{$p.Title}}</a><span class="rank-meta">{{$p.Blog}} · {{views $p.Views}} {{viewWord $p.Views}}</span></div></li>
+        {{end}}
+      </ol>
+    </div>
+    <div class="search-idle-block">
+      <span class="empty-kicker">Subjects</span>
+      <h2>Follow a thread.</h2>
+      <div class="tag-cloud">
+        {{range .Tags}}<a href="{{tagURL .Name}}" class="tag">{{.Name}} <span>{{.Count}}</span></a>{{end}}
+      </div>
+    </div>
+  </div>
+  {{end}}
+</div>
+{{end}}

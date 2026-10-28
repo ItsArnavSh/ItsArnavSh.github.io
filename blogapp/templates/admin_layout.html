@@ -1,0 +1,35 @@
+{{define "admin_layout"}}<!doctype html>
+<html lang="en" class="admin-page">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex, nofollow">
+  <title>{{.Title}}</title>
+  <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
+  <link rel="stylesheet" href="/assets/vendor/katex/katex.min.css">
+  <link rel="stylesheet" href="/assets/admin.css">
+</head>
+<body data-csrf="{{.CSRF}}">
+  {{if .SignedIn}}
+  <header class="admin-top">
+    <a class="admin-brand" href="/admin"><span class="admin-seal">A</span><span>The Editor's Desk<small>ARNΛV internal</small></span></a>
+    <nav class="admin-nav">
+      <a href="/admin">Dispatches</a>
+      <a href="/admin/posts/new">New dispatch</a>
+      <a href="/devlog" target="_blank" rel="noopener">View paper ↗</a>
+      <a href="/admin/export">Export all</a>
+      <form method="post" action="/admin/logout">
+        <input type="hidden" name="csrf" value="{{.CSRF}}">
+        <button type="submit" class="link-button">Log out</button>
+      </form>
+    </nav>
+  </header>
+  {{end}}
+  <main class="admin-main">
+    {{template "content" .}}
+  </main>
+  {{if .SignedIn}}<footer class="admin-foot"><span>Signed in as {{.Admin}}</span></footer>{{end}}
+  <script src="/assets/vendor/katex/katex.min.js" defer></script>
+  <script src="/assets/admin.js" defer></script>
+</body>
+</html>{{end}}

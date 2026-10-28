@@ -1,0 +1,52 @@
+{{define "download"}}<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{{.Post.Title}} — ARNΛV</title>
+<style>
+  :root { --paper:#f7f1e6; --ink:#241a12; --muted:#7d6957; --rule:#d6c6b1; --accent:#82492a; }
+  * { box-sizing:border-box; }
+  body { margin:0; background:var(--paper); color:var(--ink); font-family:Georgia,'Times New Roman',serif; line-height:1.7; }
+  .sheet { max-width:760px; margin:0 auto; padding:56px 28px 90px; }
+  .top { display:flex; justify-content:space-between; gap:14px; border-bottom:1px solid var(--rule); padding-bottom:12px; font:11px/1.4 ui-monospace,Menlo,monospace; text-transform:uppercase; letter-spacing:.12em; color:var(--muted); }
+  .top b { color:var(--accent); }
+  .kicker { margin-top:44px; font:11px/1.4 ui-monospace,Menlo,monospace; text-transform:uppercase; letter-spacing:.16em; color:var(--accent); }
+  h1 { font-family:Georgia,serif; font-size:clamp(2.2rem,6vw,3.8rem); line-height:1.04; letter-spacing:-.03em; margin:14px 0 14px; }
+  .deck { font-size:1.25rem; color:var(--muted); font-style:italic; margin:0 0 20px; }
+  .byline { border-top:1px solid var(--rule); border-bottom:1px solid var(--rule); padding:10px 0; margin:22px 0 34px; font:11px/1.5 ui-monospace,Menlo,monospace; text-transform:uppercase; letter-spacing:.1em; color:var(--muted); }
+  .cover { width:100%; height:auto; display:block; margin:0 0 10px; filter:grayscale(.2) sepia(.15); }
+  figcaption { font:10px/1.5 ui-monospace,Menlo,monospace; text-transform:uppercase; letter-spacing:.1em; color:var(--muted); margin-bottom:30px; }
+  h2 { font-size:1.5rem; margin:2.2em 0 .5em; line-height:1.2; }
+  h3 { font-size:1.18rem; margin:1.8em 0 .4em; }
+  p { margin:0 0 1.15em; }
+  a { color:var(--accent); }
+  blockquote { margin:1.6em 0; padding:2px 0 2px 22px; border-left:3px solid var(--accent); font-style:italic; font-size:1.1rem; }
+  pre { background:#211811; color:#f2e7d5; padding:16px; overflow:auto; font:12px/1.6 ui-monospace,Menlo,monospace; }
+  code { font-family:ui-monospace,Menlo,monospace; font-size:.86em; background:rgba(130,73,42,.08); padding:1px 4px; }
+  pre code { background:none; padding:0; }
+  img { max-width:100%; height:auto; }
+  hr { border:0; border-top:1px solid var(--rule); margin:2.5em 0; }
+  table { border-collapse:collapse; width:100%; margin:1.5em 0; font-size:.95rem; }
+  th,td { border-bottom:1px solid var(--rule); padding:8px; text-align:left; }
+  .foot { margin-top:60px; border-top:2px solid var(--ink); padding-top:16px; font:11px/1.6 ui-monospace,Menlo,monospace; text-transform:uppercase; letter-spacing:.1em; color:var(--muted); }
+  .foot b { color:var(--ink); }
+  @media print { .sheet { padding:0; } a { color:inherit; } }
+</style>
+</head>
+<body>
+<div class="sheet">
+  <div class="top"><span><b>ARNΛV</b> · {{(blog .Post.Blog).Name}}</span><span>Downloaded {{date .Now}}</span></div>
+  <div class="kicker">{{.Post.Blog}} · Dispatch {{printf "%03d" .Post.ID}}</div>
+  <h1>{{.Post.Title}}</h1>
+  {{with .Post.Subtitle}}<p class="deck">{{.}}</p>{{end}}
+  <div class="byline">By {{.Post.Author}} · {{dateFull .Post.PublishedAt}} · {{reading .Post.ReadingMinutes}} · {{views .Post.Views}} {{viewWord .Post.Views}}</div>
+  {{if .Post.CoverImage}}<figure><img class="cover" src="{{.Post.CoverImage}}" alt="{{.Post.CoverAlt}}">{{if .Post.CoverAlt}}<figcaption>{{.Post.CoverAlt}}</figcaption>{{end}}</figure>{{end}}
+  {{.Post.BodyHTML}}
+  <div class="foot">
+    <b>ARNΛV</b> · Two editions, one desk. · {{.Site.URL}}{{.Post.URL}}<br>
+    This file is self-contained. Markdown source available at the original URL.
+  </div>
+</div>
+</body>
+</html>{{end}}

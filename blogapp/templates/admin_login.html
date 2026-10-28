@@ -1,0 +1,60 @@
+{{define "content"}}
+<div class="login-wrap">
+  <section class="login-paper">
+    <div class="login-mast">
+      <span class="login-stamp">A</span>
+      <span class="kicker">ARNΛV · Internal</span>
+      <h1>The Editor's Desk</h1>
+      <p>Staff entrance for the Devlog and the Journal.</p>
+    </div>
+
+    {{if .Error}}<div class="notice error">{{.Error}}</div>{{end}}
+
+    {{with .Device}}
+    <div class="device-card" data-device-poll="/admin/login/poll" data-interval="{{.Interval}}" data-expires="{{.ExpiresIn}}">
+      <span class="kicker">GitHub device sign-in</span>
+      <p>Open GitHub on any device, enter this one-time code, and approve the request. This page will finish signing you in.</p>
+      <div class="device-code">{{.Code}}</div>
+      <div class="device-actions">
+        <a class="button" href="{{.CompleteURI}}" target="_blank" rel="noopener">Open GitHub ↗</a>
+        <button class="button ghost" type="button" data-device-check>I've approved it</button>
+      </div>
+      <div class="device-status" data-device-status>Waiting for GitHub…</div>
+      <p class="device-note">Only the account <b>@{{$.Admin}}</b> can open this desk. The code expires in <span data-device-timer>{{.ExpiresIn}}</span> seconds.</p>
+    </div>
+    {{else}}
+    <div class="login-actions">
+      <form method="post" action="/admin/login/start">
+        <button class="button github-button" type="submit">
+          <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor" aria-hidden="true"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.3 3.44 9.8 8.2 11.39.6.11.8-.26.8-.58v-2.23c-3.34.73-4.03-1.42-4.03-1.42-.55-1.39-1.33-1.76-1.33-1.76-1.09-.74.08-.73.08-.73 1.2.09 1.84 1.24 1.84 1.24 1.07 1.83 2.8 1.3 3.49 1 .11-.78.42-1.31.76-1.61-2.66-.3-5.46-1.33-5.46-5.93 0-1.31.47-2.38 1.24-3.22-.12-.3-.54-1.52.12-3.18 0 0 1.01-.32 3.3 1.23A11.5 11.5 0 0 1 12 5.8c1.02.01 2.05.14 3.01.4 2.29-1.55 3.3-1.23 3.3-1.23.65 1.66.25 2.88.12 3.18.77.84 1.24 1.91 1.24 3.22 0 4.61-2.8 5.62-5.48 5.92.43.37.81 1.1.81 2.22v3.29c0 .32.2.7.81.58C20.57 21.8 24 17.3 24 12c0-6.63-5.37-12-12-12z"/></svg>
+          Continue with GitHub
+        </button>
+      </form>
+      <p class="login-note">This uses GitHub's device flow. No password ever touches this server.</p>
+      {{if .DevLogin}}<a class="dev-login" href="/admin/dev-login">Local development sign-in →</a>{{end}}
+    </div>
+    {{end}}
+
+    <div class="login-foot">
+      <a href="/devlog">← Back to the paper</a>
+      <span>Only @ItsArnavSh may enter.</span>
+    </div>
+  </section>
+  <aside class="login-aside">
+    <div class="login-quote">
+      <span class="quote-mark">“</span>
+      <p>The first draft is always a newspaper. It has a front page, a deadline, and no comment section.</p>
+      <span class="quote-by">The editor, probably</span>
+    </div>
+    <div class="login-rules">
+      <span>House rules</span>
+      <ol>
+        <li>Markdown in, Markdown out.</li>
+        <li>Images belong in the piece, not in a cloud silo.</li>
+        <li>LaTeX is welcome at the desk.</li>
+        <li>No comments. Ever.</li>
+      </ol>
+    </div>
+  </aside>
+</div>
+{{end}}

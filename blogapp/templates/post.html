@@ -1,0 +1,144 @@
+{{define "content"}}
+<div class="reading-progress" aria-hidden="true"><span></span></div>
+<article class="article-wrap" itemscope itemtype="https://schema.org/Article">
+  <header class="article-head">
+    <div class="breadcrumb">
+      <a href="{{.Blog.Path}}">{{.Blog.Name}}</a>
+      <span>/</span>
+      <span>Dispatch {{printf "%03d" .Post.ID}}</span>
+    </div>
+    <div class="kicker-row">
+      <span class="kicker">{{.Post.Blog}}</span>
+      <span class="kicker-sep">/</span>
+      <span class="kicker-muted">{{dateFull .Post.PublishedAt}}</span>
+      {{if .Post.Featured}}<span class="kicker-badge">Editor's pick</span>{{end}}
+    </div>
+    <h1 class="article-title" itemprop="headline">{{.Post.Title}}</h1>
+    {{with .Post.Subtitle}}<p class="article-deck" itemprop="alternativeHeadline">{{.}}</p>{{end}}
+    <div class="article-byline">
+      <span class="byline-seal" aria-hidden="true">A</span>
+      <div>
+        <span class="byline-name" itemprop="author">Arnav Sharma</span>
+        <span class="byline-meta">{{date .Post.PublishedAt}} · {{reading .Post.ReadingMinutes}} · <span data-view-count>{{views .Post.Views}}</span> <span data-view-word>{{viewWord .Post.Views}}</span></span>
+      </div>
+      <div class="article-share-inline">
+        <button type="button" class="icon-btn" data-share="copy" data-url="{{.Canonical}}" aria-label="Copy link">
+          <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M10 13a5 5 0 0 0 7.5.5l2-2a5 5 0 0 0-7-7l-1.1 1.1"></path><path d="M14 11a5 5 0 0 0-7.5-.5l-2 2a5 5 0 0 0 7 7l1.1-1.1"></path></svg>
+        </button>
+        <button type="button" class="icon-btn" data-share="native" aria-label="Share">
+          <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="18" cy="5" r="3"></circle><circle cx="6" cy="12" r="3"></circle><circle cx="18" cy="19" r="3"></circle><path d="m8.6 10.5 6.8-4M8.6 13.5l6.8 4"></path></svg>
+        </button>
+      </div>
+    </div>
+    {{template "share" .}}
+  </header>
+
+  {{if .Post.CoverImage}}
+  <figure class="article-cover">
+    <img src="{{.Post.CoverImage}}" alt="{{.Post.CoverAlt}}" loading="eager">
+    {{if .Post.CoverAlt}}<figcaption>{{.Post.CoverAlt}}</figcaption>{{end}}
+  </figure>
+  {{end}}
+
+  <div class="article-grid">
+    <div class="article-body">
+      {{if .Post.TOC}}
+      <details class="toc-mobile">
+        <summary>In this dispatch <span>{{len .Post.TOC}} sections</span></summary>
+        <ol>
+          {{range .Post.TOC}}<li class="toc-level-{{.Level}}"><a href="#{{.ID}}">{{.Text}}</a></li>{{end}}
+        </ol>
+      </details>
+      {{end}}
+      <div class="prose" itemprop="articleBody">
+        {{.Post.BodyHTML}}
+      </div>
+      <div class="article-end">
+        <span class="end-mark" aria-hidden="true">■</span>
+        <span>End of dispatch</span>
+      </div>
+
+      <div class="article-tags">
+        <span class="label">Filed under</span>
+        {{range .Post.Tags}}<a class="tag" href="{{tagURL .}}">{{.}}</a>{{end}}
+      </div>
+
+      <div class="download-desk">
+        <div class="download-head">
+          <h2>Take this dispatch with you</h2>
+          <span>Standard Markdown underneath. No lock-in.</span>
+        </div>
+        <div class="download-grid">
+          <a href="/download/{{.Post.Blog}}/{{.Post.Slug}}.md"><b>.md</b><span>Markdown</span></a>
+          <a href="/download/{{.Post.Blog}}/{{.Post.Slug}}.html"><b>.html</b><span>Standalone</span></a>
+          <a href="/download/{{.Post.Blog}}/{{.Post.Slug}}.epub"><b>.epub</b><span>E-reader</span></a>
+          <a href="/download/{{.Post.Blog}}/{{.Post.Slug}}.txt"><b>.txt</b><span>Plain text</span></a>
+          <a href="/download/{{.Post.Blog}}/{{.Post.Slug}}.json"><b>.json</b><span>Data</span></a>
+          <a href="/print/{{.Post.Blog}}/{{.Post.Slug}}" target="_blank" rel="noopener"><b>pdf</b><span>Print / save</span></a>
+        </div>
+      </div>
+
+      {{if or .Prev .Next}}
+      <nav class="prev-next" aria-label="More dispatches">
+        {{with .Prev}}<a class="prev-next-card prev" href="{{.URL}}"><span>Previously</span><b>{{.Title}}</b></a>{{else}}<span></span>{{end}}
+        {{with .Next}}<a class="prev-next-card next" href="{{.URL}}"><span>Up next</span><b>{{.Title}}</b></a>{{else}}<span></span>{{end}}
+      </nav>
+      {{end}}
+    </div>
+
+    <aside class="article-aside">
+      {{if .Post.TOC}}
+      <div class="aside-block toc-block">
+        <h3>In this dispatch</h3>
+        <ol>
+          {{range .Post.TOC}}<li class="toc-level-{{.Level}}"><a href="#{{.ID}}">{{.Text}}</a></li>{{end}}
+        </ol>
+      </div>
+      {{end}}
+      <div class="aside-block">
+        <h3>Reading time</h3>
+        <div class="aside-big">{{.Post.ReadingMinutes}}<span>min</span></div>
+        <p class="aside-note">{{.Post.WordCount}} words, set for a slow read.</p>
+      </div>
+      <div class="aside-block">
+        <h3>Views</h3>
+        <div class="aside-big" data-view-count>{{views .Post.Views}}</div>
+        <p class="aside-note">Counted once per reader per day. No tracking pixels.</p>
+      </div>
+      <div class="aside-block aside-download">
+        <h3>Download</h3>
+        <a href="/download/{{.Post.Blog}}/{{.Post.Slug}}.md">Markdown</a>
+        <a href="/download/{{.Post.Blog}}/{{.Post.Slug}}.epub">EPUB</a>
+        <a href="/download/{{.Post.Blog}}/{{.Post.Slug}}.html">HTML</a>
+        <a href="/print/{{.Post.Blog}}/{{.Post.Slug}}" target="_blank" rel="noopener">PDF / print</a>
+      </div>
+      <div class="aside-block">
+        <h3>Share</h3>
+        <div class="share-buttons compact">
+          <a class="share-btn" href="{{shareX .Post.Title .Canonical}}" target="_blank" rel="noopener noreferrer" aria-label="Share on X">X</a>
+          <a class="share-btn" href="{{shareLinkedIn .Canonical}}" target="_blank" rel="noopener noreferrer" aria-label="Share on LinkedIn">in</a>
+          <a class="share-btn" href="{{shareWhatsApp .Post.Title .Canonical}}" target="_blank" rel="noopener noreferrer" aria-label="Share on WhatsApp">wa</a>
+          <a class="share-btn" href="{{shareReddit .Post.Title .Canonical}}" target="_blank" rel="noopener noreferrer" aria-label="Share on Reddit">re</a>
+          <a class="share-btn" href="{{shareTelegram .Post.Title .Canonical}}" target="_blank" rel="noopener noreferrer" aria-label="Share on Telegram">tg</a>
+          <button class="share-btn" type="button" data-share="copy" data-url="{{.Canonical}}" aria-label="Copy link">↗</button>
+        </div>
+      </div>
+    </aside>
+  </div>
+
+  {{if .Related}}
+  <section class="related-section">
+    <div class="section-rule"><h2>More from the {{.Blog.Name}}</h2><span>Keep reading</span></div>
+    <div class="related-grid">
+      {{range .Related}}
+      <article class="related-card">
+        <div class="kicker-row"><span class="kicker">{{.Blog}}</span><span class="kicker-muted">{{date .PublishedAt}}</span></div>
+        <h3><a href="{{.URL}}">{{.Title}}</a></h3>
+        <div class="meta-line">{{reading .ReadingMinutes}} · {{views .Views}} {{viewWord .Views}}</div>
+      </article>
+      {{end}}
+    </div>
+  </section>
+  {{end}}
+</article>
+{{end}}
