@@ -80,40 +80,38 @@
     </head>
     <body>
         <div class="container">
-            <a
-                class="blog-cta"
-                href="https://blog.15.134.14.153.sslip.io/devlog"
-                aria-label="Read the ARNΛV blog"
-            >
-                <span class="blog-cta-arrow" aria-hidden="true">↗</span>
-                <span class="blog-cta-text">
-                    <span class="blog-cta-kicker">The blog</span>
-                    <span class="blog-cta-title">Field notes &amp; build logs</span>
-                </span>
-            </a>
             <div class="heading">
                 <h1>Arnav Sharma</h1>
                 <p class="tagline">
                     Coder &nbsp;/&nbsp; Creative &nbsp;/&nbsp; Architect
                 </p>
-                <a class="resume-btn" href="ArnavSharma_b.pdf" download>
-                    <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="14"
-                        height="14"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="currentColor"
-                        stroke-width="2"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
+                <div class="heading-actions">
+                    <a class="resume-btn" href="ArnavSharma_b.pdf" download>
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            width="14"
+                            height="14"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="2"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                        >
+                            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                            <polyline points="7 10 12 15 17 10"></polyline>
+                            <line x1="12" y1="15" x2="12" y2="3"></line>
+                        </svg>
+                        Download R&eacute;sum&eacute;
+                    </a>
+                    <a
+                        class="resume-btn blog-btn"
+                        href="https://blog.15.134.14.153.sslip.io/devlog"
                     >
-                        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
-                        <polyline points="7 10 12 15 17 10"></polyline>
-                        <line x1="12" y1="15" x2="12" y2="3"></line>
-                    </svg>
-                    Download R&eacute;sum&eacute;
-                </a>
+                        Blog
+                        <span aria-hidden="true">↗</span>
+                    </a>
+                </div>
             </div>
             <p>
                 Heyo, I am Arnav, a pre-final year CSE student who is often
@@ -271,13 +269,17 @@
                         </li>
                         <li>
                             Led development of multiple FOSS projects:
-                            Pokearcadia, Resrap, and OSDTyp.
+                            Pokearcadia, Resrap, and OSDType.
                         </li>
                     </ul>
                 </li>
             </ol>
             <h2>Projects</h2>
             <ol class="plain-list">
+                <li>
+                    <a href="https://www.osd-typ.in/">OSDType</a>
+                    <span class="desc">A server-authoritative speedtyping arena for coders with ranked Elo, multiplayer rooms, contests, adaptive bots, and anti-cheat. Built with SvelteKit, Go, WebSockets, PostgreSQL, Redis, and Rust</span>
+                </li>
                 <li>
                     <a href="https://github.com/ItsArnavSh/lightroom-at-home">Lightroom at Home</a>
                     <span class="desc">A Haskell CLI image color grader built on JuicyPixels, applying plain-text edit scripts like &quot;warmth 12; contrast 1.15; shadows 0.2&quot; to photos from the terminal</span>
@@ -293,10 +295,6 @@
                 <li>
                     <a href="https://medium.com/@itsarnavsh/lets-go-gambling-2101c2a67dac">Tyche</a>
                     <span class="desc">A high volume distributed function scheduling and running pipeline built with Go and Java</span>
-                </li>
-                <li>
-                    <a href="https://github.com/ItsArnavSh/osdtype">OSDType</a>
-                    <span class="desc">A Monkeytype for developers with real-time games, ranks, matchmaking, and clubs in Go, powered by Resrap</span>
                 </li>
                 <li>
                     <a href="https://resrap.osdc.dev/">Resrap / ResrapRS</a>
